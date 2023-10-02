@@ -1,11 +1,28 @@
 <template>
-  <router-view/>
+  <div class="main-container">
+    <HeaderTitle :title="headerTitle"/>
+    <router-view/>
+  </div>
 </template>
 
 <script setup>
+import HeaderTitle from "@/components/contents/titles/HeaderTitle.vue";
+import {onMounted, ref, watch} from "vue";
+import {useRouter} from "vue-router";
+
+const headerTitle = ref('')
+const router = useRouter()
+
+watch(() => router.path, (to, from) => {
+  console.log('to', to)
+  console.log('from', from)
+})
+onMounted(() => {
+  console.log('router', router)
+})
 </script>
 
-<style scoped>
+<style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -14,6 +31,7 @@
   color: #2c3e50;
   margin-top: 60px;
 }
+
 h3 {
   margin: 40px 0 0;
 }
@@ -30,5 +48,10 @@ li {
 
 a {
   color: #42b983;
+}
+
+.main-container {
+  width: 600px;
+  margin: 0 auto;
 }
 </style>

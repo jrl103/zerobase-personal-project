@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 
 import routes from './router/router'
+import '@/assets/style/reset.scss'
 
 const app = createApp(App)
 // eslint-disable-next-line no-undef

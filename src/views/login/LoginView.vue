@@ -54,7 +54,7 @@ const login = async () => {
       // 아이디가 있는 경우
       if (item.pwd === pwdInput.value) {
         // 아이디, 비밀번호가 맞는 경우
-        const expire = new Date()
+        // const expire = new Date()
         msg.value = '로그인 되었습니다.'
         document.cookie = "accessToken=sampleToken1"
         route.push('/')

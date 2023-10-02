@@ -1,56 +1,113 @@
 <template>
   <div>
-    <h1>Project</h1>
-    <ul>
-      <li>
-        <button @click="$router.push('/signup')">회원가입</button>
-      </li>
-      <li v-if="!accessTokenValue">
-        <button @click="$router.push('/login')">로그인</button>
-      </li>
-      <li v-else>
-        <button @click="logOut()">로그아웃</button>
-      </li>
-      <li>
-        <button @click="$router.push('/sociallogin')">소셜 로그인</button>
-      </li>
-      <li>
-        <button @click="$router.push('/pagenation')">페이지네이션</button>
-      </li>
-      <li>
-        <button @click="$router.push('/search')">검색</button>
-      </li>
-      <li>
-        <button @click="$router.push('/wishList')">위시리스트</button>
-      </li>
-      <li>
-        <button @click="$router.push('/filtering')">상품 필터링</button>
-      </li>
-    </ul>
+    <div class="img-list-wrap">
+      <div :class="item.isShow ? 'img-list-item' : 'img-list-item is-hidden'"
+           v-for="(item, index) in pageTitleData" :key="'item' + index">
+        <ImgTitleContentsCard :title="item.title" :img-url="item.imgUrl"
+                              @onClickEvt="item.id === 'logout' ? logOut() : clickNav(item)"/>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import {onMounted, ref} from "vue";
+import ImgTitleContentsCard
+  from "@/components/contents/cards/ImgTitleContentsCard.vue";
+import {useRouter} from "vue-router";
 
+const route = useRouter()
 const acessTokenKey = ref('')
 const accessTokenValue = ref('')
+const pageTitleData = ref([
+  {
+    id: 'signup',
+    isShow: true,
+    title: '회원가입',
+    imgUrl: require('@/assets/icon/icon-signup.png'),
+    moveUrl: '/signup'
+  },
+  {
+    id: 'login',
+    isShow: true,
+    title: '로그인',
+    imgUrl: require('@/assets/icon/icon-user.png'),
+    moveUrl: '/login'
+  },
+  {
+    id: 'logout',
+    isShow: true,
+    title: '로그아웃',
+    imgUrl: require('@/assets/icon/icon-user.png')
+  },
+  {
+    id: 'pagenation',
+    isShow: true,
+    title: '페이지네이션',
+    imgUrl: require('@/assets/icon/icon-pagenation.png'),
+    moveUrl: '/pagenation'
+  },
+  {
+    id: 'search',
+    isShow: true,
+    title: '검색',
+    imgUrl: require('@/assets/icon/icon-search.png'),
+    moveUrl: '/search'
+  },
+  {
+    id: 'wishlist',
+    isShow: true,
+    title: '위시리스트',
+    imgUrl: require('@/assets/icon/icon-wish.png'),
+    moveUrl: '/wishList'
+  },
+  {
+    id: 'filtering',
+    isShow: true,
+    title: '상품 필터링',
+    imgUrl: require('@/assets/icon/icon-product-filtering.png'),
+    moveUrl: '/filtering'
+  },
+])
+
+const checkIsShowList = () => {
+  pageTitleData.value.forEach((item) => {
+    if (accessTokenValue.value) {
+      if (item.id === 'signup' || item.id === 'login') {
+        item.isShow = false
+      }
+    } else {
+      if (item.id === 'logout' || item.id === 'wishlist') {
+        item.isShow = false
+      }
+    }
+  })
+}
+
 const logOut = () => {
   document.cookie = 'accessToken' + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
   alert('로그아웃 되었습니다.')
+  pageTitleData.value.forEach((item) => {
+    if (item.id === 'signup' || item.id === 'login') {
+      item.isShow = true
+    }
+    if (item.id === 'logout' || item.id === 'wishlist') {
+      item.isShow = false
+    }
+  })
 }
 
+const clickNav = (item) => {
+  route.push(`${item.moveUrl}`)
+}
 onMounted(() => {
   const test2 = new Array(document.cookie)
-  console.log(test2)
 
   test2.forEach((item) => {
     const divide1 = item.split(';')
-    console.log(divide1)
 
     divide1.forEach((item2) => {
       const divide2 = item2.split('=')
-      console.log(divide2)
 
       if (divide2[0] === 'accessToken') {
         acessTokenKey.value = divide2[0]
@@ -58,8 +115,16 @@ onMounted(() => {
       }
     })
   })
-  console.log('acessTokenKey.value', acessTokenKey.value)
-  console.log('accessTokenValue.value', accessTokenValue.value)
+
+  checkIsShowList()
 })
 </script>
-<style></style>
+<style scoped lang="scss">
+.img-list-item {
+  margin: 20px 0;
+
+  &.is-hidden {
+    display: none;
+  }
+}
+</style>
