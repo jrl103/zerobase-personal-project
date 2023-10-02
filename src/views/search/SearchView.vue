@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Search</h1>
     <form>
       <div class="search-box">
         <label for="search">검색</label>
@@ -80,15 +79,15 @@ onMounted(() => {
 
 </script>
 <style scoped lang="scss">
-.search-box {
-  display: flex;
-}
-
-.input-bottom {
-  background-color: beige;
-  cursor: pointer;
-  &.is-hidden {
-    display: none;
-  }
-}
+//.search-box {
+//  display: flex;
+//}
+//
+//.input-bottom {
+//  background-color: beige;
+//  cursor: pointer;
+//  &.is-hidden {
+//    display: none;
+//  }
+//}
 </style>

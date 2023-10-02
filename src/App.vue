@@ -1,5 +1,6 @@
 <template>
   <div class="main-container">
+    <HeaderLayout :is-not-main="isNotMain"/>
     <HeaderTitle :title="headerTitle"/>
     <router-view/>
   </div>
@@ -7,18 +8,45 @@
 
 <script setup>
 import HeaderTitle from "@/components/contents/titles/HeaderTitle.vue";
-import {onMounted, ref, watch} from "vue";
-import {useRouter} from "vue-router";
+import {ref, watch} from "vue";
+import {useRoute} from "vue-router";
+import HeaderLayout from "@/components/layouts/HeaderLayout.vue";
 
-const headerTitle = ref('')
-const router = useRouter()
+const headerTitle = ref('Project')
+const isNotMain = ref(false)
+const route = useRoute()
 
-watch(() => router.path, (to, from) => {
-  console.log('to', to)
-  console.log('from', from)
-})
-onMounted(() => {
-  console.log('router', router)
+watch(() => route.path, (to) => {
+  switch (to) {
+    case '/' :
+      headerTitle.value = 'Project'
+      isNotMain.value = false
+      break
+    case '/signup' :
+      headerTitle.value = 'Signup'
+      isNotMain.value = true
+      break
+    case '/login' :
+      headerTitle.value = 'Login'
+      isNotMain.value = true
+      break
+    case '/pagenation' :
+      headerTitle.value = 'Pagenation'
+      isNotMain.value = true
+      break
+    case '/search' :
+      headerTitle.value = 'Search'
+      isNotMain.value = true
+      break
+    case '/wishlist' :
+      headerTitle.value = 'Wish List'
+      isNotMain.value = true
+      break
+    case '/filtering' :
+      headerTitle.value = 'Product Filterings'
+      isNotMain.value = true
+      break
+  }
 })
 </script>
 

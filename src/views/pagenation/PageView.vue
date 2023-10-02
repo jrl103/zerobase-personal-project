@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Pagenation</h1>
     <div class="pageNation">
       <div v-for="(pageNum, idx) in processList" :key="idx"
            :class="currentPage === pageNum.pageNum ? 'is-active' : ''"

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Filtering</h1>
     <div class="filtering-box">
       <div v-for="(item,idx) in checkboxData" :key="'checkBoxFilter' + idx">
         <input type="checkbox" v-model="selectFilterData" :value="item.value"

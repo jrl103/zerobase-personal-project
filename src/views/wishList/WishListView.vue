@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>WishList</h1>
     <div class="container">
       <ul>
         <li v-for="(item, index) in likeData" :key="'wish' + index">

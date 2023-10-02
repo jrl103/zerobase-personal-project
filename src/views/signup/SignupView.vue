@@ -1,6 +1,5 @@
 <template>
   <div class="wrapper">
-    <h1>Sign up</h1>
     <section class="section">
       <form action="submit">
         <div class="id">
@@ -67,24 +66,4 @@ const signUp = async () => {
 </script>
 
 <style scoped lang="scss">
-.wrapper {
-  width: 1200px;
-  margin: 0 auto;
-}
-
-.section {
-  margin: 0 auto;
-}
-
-.wrapper .section div {
-  margin-bottom: 20px;
-}
-
-h1 {
-  margin-bottom: 20px;
-}
-
-label {
-  margin-right: 10px;
-}
 </style>

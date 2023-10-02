@@ -2,14 +2,13 @@
   <div class="wrapper">
     <section class="section">
       <div class="socialLogin">
-        <div class="naver">네이버</div>
-        <div class="kakao" @click="kakaoLogin()">카카오</div>
-        <div class="facebook">페이스북</div>
-        <div class="google">구글</div>
+<!--        <div class="naver">네이버</div>-->
+        <div class="kakao" @click="kakaoLogin()">카카오 소셜로그인</div>
+<!--        <div class="facebook">페이스북</div>-->
+<!--        <div class="google">구글</div>-->
       </div>
       <div class="footer">
         <p class="join" @click="$router.push('/signup')">회원가입</p>
-        <p class="findPwd">비밀번호 찾기</p>
       </div>
     </section>
   </div>
@@ -54,29 +53,5 @@ const kakaoLogin = () => {
 </script>
 
 <style scoped lang="scss">
-.wrapper {
-  width: 1200px;
-  margin: 0 auto;
-}
-h1 {
-  margin-bottom: 15px;
-}
-.section {
-  margin: 0 auto;
-}
-label {
-  margin-right: 10px;
-}
-.wrapper .section div {
-  margin-bottom: 20px;
-}
-.socialLogin {
-  display: flex;
-  gap: 15px;
-}
-.footer {
-  display: flex;
-  gap: 15px;
-}
 
 </style>

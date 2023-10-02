@@ -2,7 +2,6 @@
   <div class="wrapper">
     <div class="section">
       <div class="login">
-        <h1>Login</h1>
         <form action="">
           <div>
             <label for="id">아이디</label>
@@ -99,28 +98,4 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-.wrapper {
-  width: 1200px;
-  margin: 0 auto;
-}
-h1 {
-  margin-bottom: 15px;
-}
-.section {
-  margin: 0 auto;
-}
-label {
-  margin-right: 10px;
-}
-.wrapper .section div {
-  margin-bottom: 20px;
-}
-.socialLogin {
-  display: flex;
-  gap: 15px;
-}
-.footer {
-  display: flex;
-  gap: 15px;
-}
 </style>
