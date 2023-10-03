@@ -1,17 +1,17 @@
 <template>
   <div>
+    <div class="dataList">
+      <div v-for="(data, idx) in currentDataList" :key="idx" class="data-list-box">
+        <PagenationItem :title="data.title" :contents="data.contents"/>
+      </div>
+    </div>
+
     <div class="pageNation">
       <div v-for="(pageNum, idx) in processList" :key="idx"
-           :class="currentPage === pageNum.pageNum ? 'is-active' : ''"
+           :class="currentPage === pageNum.pageNum ? 'page-num-item is-active' : 'page-num-item'"
            @click="clickPage(pageNum.pageNum)"
       >
         <p>{{ idx + 1 }}</p>
-      </div>
-    </div>
-    <div class="dataList">
-      <div v-for="(data, idx) in currentDataList" :key="idx">
-        <div>{{data.title}}</div>
-        <div>{{data.contents}}</div>
       </div>
     </div>
   </div>
@@ -19,6 +19,7 @@
 
 <script setup>
 import {onMounted, ref} from "vue";
+import PagenationItem from "@/components/contents/cards/PagenationItem.vue";
 
 let pagenationDatas = ref(null)
 let processList = ref([])
@@ -67,14 +68,21 @@ onMounted(() => {
 <style scoped lang="scss">
 .pageNation {
   display: flex;
-
-  p {
-    padding: 15px;
+  justify-content: space-between;
+  margin-top: 20px;
+  .page-num-item {
+    padding: 5px;
     cursor: pointer;
+    border: 1px solid lightgray;
+    border-radius: 5px;
   }
 }
 
 .is-active {
-  color: red;
+  color: tomato;
+}
+
+.data-list-box {
+  margin-bottom: 5px;
 }
 </style>

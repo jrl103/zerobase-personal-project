@@ -1,7 +1,9 @@
 <template>
   <div class="main-container">
     <HeaderLayout :is-not-main="isNotMain"/>
-    <HeaderTitle :title="headerTitle"/>
+    <div class="header-title-wrap">
+      <HeaderTitle :title="headerTitle"/>
+    </div>
     <router-view/>
   </div>
 </template>
@@ -81,5 +83,8 @@ a {
 .main-container {
   width: 600px;
   margin: 0 auto;
+}
+.header-title-wrap {
+  margin-bottom: 30px;
 }
 </style>

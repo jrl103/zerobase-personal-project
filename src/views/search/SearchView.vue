@@ -1,11 +1,14 @@
 <template>
-  <div>
+  <div class="search-view">
     <form>
       <div class="search-box">
-        <label for="search">검색</label>
+        <p>ex ) 피자, 떡볶이, 계란 ...</p>
         <div class="input-box">
-          <input id="search" type="text" :value="inputValue"
-                 @input="handleInput">
+          <InputBox v-model="inputValue" @input="handleInput" :label="'검색'" :value="{
+                type: 'text',
+                id: 'search',
+                placeholder: '검색해주세요.'
+              }"/>
           <div :class="inputValue ? 'input-bottom' : 'input-bottom is-hidden'">
             <div v-for="(item, index) in autoCompleteList" :key="'auto' + index"
                  @click="clickInputData(item)">
@@ -13,7 +16,10 @@
             </div>
           </div>
         </div>
-        <button type="button" @click="clickSearchBtn()">Search</button>
+
+        <div class="button-wrap">
+          <FormButton :title="'Search'" @click-button="clickSearchBtn()"/>
+        </div>
       </div>
     </form>
     <div class="dataList" v-for="(item, idx) in searchedDataList" :key="idx">
@@ -24,6 +30,8 @@
 
 <script setup>
 import {onMounted, ref} from "vue";
+import InputBox from "@/components/contents/formItems/input/InputBox.vue";
+import FormButton from "@/components/contents/buttons/FormButton.vue";
 
 const inputValue = ref('')
 const newData = ref([])
@@ -59,13 +67,24 @@ const dataProcess = () => {
 }
 
 const clickSearchBtn = () => {
-  searchedDataList.value = newData.value.filter((element1) => element1.includes(inputValue.value))
+  if (inputValue.value) {
+    searchedDataList.value = newData.value.filter((element1) => element1.includes(inputValue.value))
+  } else {
+    alert('검색창이 비었습니다.')
+    searchedDataList.value = []
+  }
 }
 
 const handleInput = (event) => {
   // 한글을 실시간으로 반영하기 위해서는 v-model이 아니라 event를 이용해서 넣어줘야한다.
+  // :value="inputValue" @input="handleInput" 에서
+  // --> 컴포넌트화 시키면서  v-model="inputValue" @input="handleInput" 로 바꿈
   inputValue.value = event.target.value
-  autoCompleteList.value = newData.value.filter((item) => item.includes(inputValue.value));
+  if (inputValue.value) {
+    autoCompleteList.value = newData.value.filter((item) => item.includes(inputValue.value));
+  } else {
+    autoCompleteList.value = []
+  }
 };
 
 const clickInputData = (item) => {
@@ -79,15 +98,14 @@ onMounted(() => {
 
 </script>
 <style scoped lang="scss">
-//.search-box {
-//  display: flex;
-//}
-//
-//.input-bottom {
-//  background-color: beige;
-//  cursor: pointer;
-//  &.is-hidden {
-//    display: none;
-//  }
-//}
+.search-view {
+  p {
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+}
+.button-wrap {
+  margin-top: 40px;
+}
+
 </style>
