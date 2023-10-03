@@ -1,11 +1,8 @@
 <template>
   <div class="wrapper">
-    <section class="section">
+    <section class="section-wrap">
       <div class="socialLogin">
-<!--        <div class="naver">네이버</div>-->
         <div class="kakao" @click="kakaoLogin()">카카오 소셜로그인</div>
-<!--        <div class="facebook">페이스북</div>-->
-<!--        <div class="google">구글</div>-->
       </div>
       <div class="footer">
         <p class="join" @click="$router.push('/signup')">회원가입</p>
@@ -20,10 +17,10 @@ import {useRouter} from "vue-router";
 
 const router = useRouter()
 const kakaoLogin = () => {
-  // const params = {
-  //   redirectUri:'http://localhost:8080/',
-  // }
-  // window.Kakao.Auth.authorize(params)
+  const params = {
+    redirectUri:'http://localhost:8080/',
+  }
+  window.Kakao.Auth.authorize(params)
 
   // 로그인 시도
   window.Kakao.Auth.login({
@@ -53,5 +50,14 @@ const kakaoLogin = () => {
 </script>
 
 <style scoped lang="scss">
-
+.wrapper {
+  .section-wrap {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    div {
+      cursor: pointer;
+    }
+  }
+}
 </style>

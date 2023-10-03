@@ -88,7 +88,6 @@ const deleteWishBtn = (itemId) => {
   const filterData = compareLocalList.filter((item) => item !== itemId)
 
   localStorage.setItem('wishList', JSON.stringify(filterData))
-  // console.log(compareLocalList)
 
   likeData.value.forEach((item) => {
     if (item.id === itemId) {

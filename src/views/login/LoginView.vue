@@ -1,19 +1,33 @@
 <template>
   <div class="wrapper">
     <div class="section">
-      <div class="login">
-        <form action="">
-          <div>
-            <label for="id">아이디</label>
-            <input type="text" id="id" v-model="idInput">
+      <FormLayout>
+        <template v-slot:contents>
+          <div class="login">
+            <form>
+              <div class="input-box-wrap">
+                <InputBox v-model="idInput" :label="'아이디'" :value="{
+                type: 'text',
+                id: 'id',
+                placeholder: '아이디를 입력해주세요.'
+              }"/>
+              </div>
+
+              <div class="input-box-wrap">
+                <InputBox v-model="pwdInput" :label="'비밀번호'" :value="{
+                type: 'password',
+                id: 'password',
+                placeholder: '비밀번호를 입력해주세요.'
+              }"/>
+              </div>
+
+              <div class="button-wrap">
+                <FormButton :title="'로그인'" @click-button="login()"/>
+              </div>
+            </form>
           </div>
-          <div>
-            <label for="password">비밀번호</label>
-            <input type="password" id="password" v-model="pwdInput">
-          </div>
-          <button type="button" @click="login()">로그인</button>
-        </form>
-      </div>
+        </template>
+      </FormLayout>
       <SocialLoginView/>
     </div>
 
@@ -22,8 +36,12 @@
 
 <script setup>
 import SocialLoginView from "@/views/login/SocialLoginView.vue";
+import FormLayout from "@/components/layouts/form/FormLayout.vue";
+import InputBox from "@/components/contents/formItems/input/InputBox.vue";
+import FormButton from "@/components/contents/buttons/FormButton.vue";
+
 import firebase from "@/firebaseConfig";
-import { collection, getFirestore, getDocs } from 'firebase/firestore/lite'
+import {collection, getFirestore, getDocs} from 'firebase/firestore/lite'
 import {onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
 
@@ -71,15 +89,12 @@ const login = async () => {
 
 onMounted(() => {
   const test2 = new Array(document.cookie)
-  console.log(test2)
 
   test2.forEach((item) => {
     const divide1 = item.split(';')
-    console.log(divide1)
 
     divide1.forEach((item2) => {
       const divide2 = item2.split('=')
-      console.log(divide2)
 
       if (divide2[0] === 'accessToken') {
         acessTokenKey.value = divide2[0]
@@ -87,8 +102,6 @@ onMounted(() => {
       }
     })
   })
-  console.log('acessTokenKey.value', acessTokenKey.value)
-  console.log('accessTokenValue.value', accessTokenValue.value)
 
   if (accessTokenValue.value) {
     alert('이미 로그인 되었습니다.')
@@ -98,4 +111,10 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+.input-box-wrap {
+  margin-bottom: 20px;
+}
+.button-wrap {
+  margin-top: 50px;
+}
 </style>

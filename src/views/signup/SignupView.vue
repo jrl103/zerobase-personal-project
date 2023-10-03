@@ -1,22 +1,40 @@
 <template>
   <div class="wrapper">
-    <section class="section">
-      <form action="submit">
-        <div class="id">
-          <label for="id">id</label>
-          <input type="text" id="id" v-model="idInput">
-        </div>
-        <div class="password">
-          <label for="password">password</label>
-          <input type="password" id="password" v-model="pwdInput">
-        </div>
-        <div class="passwordCheck">
-          <label for="passwordCheck">passwordCheck</label>
-          <input type="password" id="passwordCheck" v-model="pwdCheckInput" @input="checkdPwd">
-        </div>
-        <button @click="signUp()" type="button">회원가입</button>
-      </form>
-    </section>
+    <FormLayout>
+      <template v-slot:contents>
+        <section class="section">
+          <form action="submit">
+            <div class="input-box-wrap">
+              <InputBox v-model="idInput" :label="'아이디'" :value="{
+                type: 'text',
+                id: 'id',
+                placeholder: '아이디를 입력해주세요.'
+              }"/>
+            </div>
+            <div class="input-box-wrap">
+              <InputBox v-model="pwdInput" :label="'비밀번호'" :value="{
+                type: 'password',
+                id: 'password',
+                placeholder: '비밀번호를 입력해주세요.'
+              }"/>
+            </div>
+            <div class="input-box-wrap">
+              <InputBox v-model="pwdCheckInput" :label="'비밀번호 확인'" :value="{
+                type: 'password',
+                id: 'passwordCheck',
+                placeholder: '비밀번호를 재입력해주세요.'
+              }"/>
+            </div>
+
+            <div class="button-wrap">
+              <FormButton :title="'회원가입'" @click-button="signUp()"/>
+
+            </div>
+          </form>
+        </section>
+      </template>
+    </FormLayout>
+
   </div>
 </template>
 
@@ -26,6 +44,10 @@ import firebase from '@/firebaseConfig'
 import { collection, getFirestore, addDoc } from 'firebase/firestore/lite'
 import {useRouter} from "vue-router";
 
+import FormLayout from "@/components/layouts/form/FormLayout.vue";
+import InputBox from "@/components/contents/formItems/input/InputBox.vue";
+import FormButton from "@/components/contents/buttons/FormButton.vue";
+
 const router = useRouter()
 
 const idInput = ref('')
@@ -34,10 +56,8 @@ const pwdCheckInput = ref('')
 
 const checkdPwd = () => {
   if (pwdInput.value === pwdCheckInput.value) {
-    console.log('비밀번호가 동일합니다.')
     return true
   } else {
-    console.log('비밀번호가 동일하지 않습니다.')
     return false
   }
 }
@@ -66,4 +86,10 @@ const signUp = async () => {
 </script>
 
 <style scoped lang="scss">
+.input-box-wrap {
+  margin-bottom: 20px;
+}
+.button-wrap {
+  margin-top: 50px;
+}
 </style>
