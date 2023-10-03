@@ -17,21 +17,20 @@ import {useRouter} from "vue-router";
 
 const router = useRouter()
 const kakaoLogin = () => {
-  const params = {
-    redirectUri:'http://localhost:8080/',
-  }
-  window.Kakao.Auth.authorize(params)
+  // const params = {
+  //   redirectUri:'http://localhost:8080/',
+  // }
+  // window.Kakao.Auth.authorize(params)
 
   // 로그인 시도
   window.Kakao.Auth.login({
     success: (res) => {
-      console.log(res)
-
+      document.cookie = `accessToken=${res.access_token}`
       // 프로필 정보 가져오기
       window.Kakao.API.request({
         url: '/v2/user/me',
         success: (res) => {
-          console.log(res);
+          console.log('res2', res)
         },
         fail: (error) => {
           console.error(error);
@@ -39,7 +38,7 @@ const kakaoLogin = () => {
       });
 
       // 로그인 완료 페이지로 이동
-      router.push('/completelogin')
+      router.push('/')
     } ,
     fail: (err) => {
       console.log(err)
