@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wishlist-view">
     <div class="container">
       <ul>
         <li v-for="(item, index) in likeData" :key="'wish' + index">
@@ -116,3 +116,26 @@ onMounted(() => {
   setData()
 })
 </script>
+<style scoped lang="scss">
+.wishlist-view {
+  .container {
+    ul {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      li {
+        p {
+          margin-bottom: 20px;
+        }
+        button {
+          width: 130px;
+          background-color: bisque;
+          padding: 10px;
+          border: 1px solid bisque;
+          border-radius: 10px;
+        }
+      }
+    }
+  }
+}
+</style>

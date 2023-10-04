@@ -40,7 +40,7 @@ watch(() => route.path, (to) => {
       headerTitle.value = 'Search'
       isNotMain.value = true
       break
-    case '/wishlist' :
+    case '/wishList' :
       headerTitle.value = 'Wish List'
       isNotMain.value = true
       break
