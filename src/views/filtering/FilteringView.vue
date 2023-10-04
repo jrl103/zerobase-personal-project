@@ -1,12 +1,16 @@
 <template>
-  <div>
+  <div class="filtering-view">
     <div class="filtering-box">
-      <div v-for="(item,idx) in checkboxData" :key="'checkBoxFilter' + idx">
-        <input type="checkbox" v-model="selectFilterData" :value="item.value"
-               @change="handleCheckbox(item, $event)">
-        <label :for="item.value">{{ item.title }}</label>
+      <div class="filter-checkbox">
+        <div v-for="(item,idx) in checkboxData" :key="'checkBoxFilter' + idx"
+             class="filter-checkbox-items">
+          <input type="checkbox" v-model="selectFilterData" :value="item.value"
+                 @change="handleCheckbox(item, $event)">
+          <label :for="item.value">{{ item.title }}</label>
+        </div>
       </div>
     </div>
+
     <div class="select-box">
       <select v-model="selectMoneyData">
         <option v-for="(item, idx) in selectboxData"
@@ -16,8 +20,9 @@
       </select>
     </div>
 
-    <div v-for="(item, index) in filteringData" :key="'filterData' + index">
-      <div>
+    <div v-for="(item, index) in filteringData" :key="'filterData' + index"
+         class="selected-box">
+      <div class="selected-items">
         <span>{{ item.title }}</span>
         <span>{{ item.price }}</span>
       </div>
@@ -166,7 +171,62 @@ const filteringMoney = (list) => {
 
 </script>
 <style scoped lang="scss">
-.filteringBox {
+.filtering-view {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  .filtering-box {
+    display: flex;
+    justify-content: center;
+
+    .filter-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      .filter-checkbox-items {
+        display: flex;
+        align-items: center;
+
+        input {
+          display: block;
+          width: 20px;
+          height: 20px;
+        }
+
+        label {
+          margin-left: 5px;
+          display: block;
+          font-size: 17px;
+          font-weight: bold;
+          margin-top: 2px;
+        }
+      }
+    }
+  }
+
+  .select-box {
+    select {
+      width: 150px;
+      height: 30px;
+      font-size: 17px;
+      padding: 0 5px;
+      margin: 30px 0;
+    }
+  }
+
+  .selected-box {
+    margin: 0 auto;
+    .selected-items {
+      display: flex;
+      width: 300px;
+      height: 25px;
+      border: 1px solid lightgray;
+      justify-content: space-around;
+      align-items: center;
+      padding: 5px 0;
+      margin-bottom: 5px;
+    }
+  }
 }
 </style>
