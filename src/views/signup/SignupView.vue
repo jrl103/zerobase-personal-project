@@ -66,14 +66,14 @@ const signUp = async () => {
   const test = collection(getFirestore(firebase), 'board')
 
   try {
-    if (checkdPwd) {
+    if (checkdPwd()) {
       await addDoc(test, {
         id: idInput.value,
         pwd: pwdInput.value,
         chkPwd: pwdCheckInput.value,
       })
       alert('회원가입에 성공했습니다.')
-      await router.push('/sociallogin')
+      router.push('/login')
     } else {
       alert('비밀번호가 동일하지 않습니다.')
     }
