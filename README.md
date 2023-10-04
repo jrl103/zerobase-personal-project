@@ -1,24 +1,9 @@
-# project-1
+# 개인프로젝트
 
-## Project setup
-```
-npm install
-```
+- 시연영상 : https://youtu.be/FXKiB2773nk
+- 프레임워크 : Vue3
+- 라이브러리 : Firebase, sass
+- 구현기능 : 회원가입, 로그인, 로그아웃, 카카오 소셜로그인, 페이지네이션, 검색, 검색 자동완성, 상품 필터링, 위시리스트
+  
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
