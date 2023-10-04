@@ -66,24 +66,24 @@ const login = async () => {
       pwd: fileds.pwd.stringValue,
     })
   })
-  result.forEach(item => {
-    if (item.id === idInput.value) {
-      // 아이디가 있는 경우
-      if (item.pwd === pwdInput.value) {
-        // 아이디, 비밀번호가 맞는 경우
-        // const expire = new Date()
-        msg.value = '로그인 되었습니다.'
-        document.cookie = "accessToken=sampleToken1"
-        route.push('/')
-      } else {
-        // 비밀번호가 틀린 경우
-        msg.value = '비밀번호가 틀렸습니다.'
-      }
+  const idCheckVal = result.some(item => item.id === idInput.value)
+  const pwdCheckVal = result.some(item => item.pwd === pwdInput.value)
+
+  if (idCheckVal) {
+    if (pwdCheckVal) {
+      // 아이디, 비밀번호가 맞는 경우
+      msg.value = '로그인 되었습니다.'
+      document.cookie = "accessToken=sampleToken1"
+      route.push('/')
     } else {
-      // 아이디가 없는 경우
-      msg.value = '계정 정보가 없습니다.'
+      // 비밀번호가 틀린 경우
+      msg.value = '비밀번호가 틀렸습니다.'
     }
-  })
+  } else {
+    // 아이디가 없는 경우
+    msg.value = '계정 정보가 없습니다.'
+  }
+
   alert(msg.value)
 }
 
