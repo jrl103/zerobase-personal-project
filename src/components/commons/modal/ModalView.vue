@@ -21,7 +21,7 @@
         </div>
       </div>
       <div class="button-wrap">
-        <FormButton :title="'등록하기'" @click-button="registerItem()" />
+        <FormButton :title="'등록하기'" @click-button="registerItem()"  />
       </div>
     </div>
     <div class="dim"></div>
@@ -36,7 +36,7 @@ import firebase from "@/firebaseConfig";
 import InputBox from "@/components/contents/formItems/input/InputBox.vue";
 import FormButton from "@/components/contents/buttons/FormButton.vue";
 
-const emits = defineEmits(['clickClose'])
+const emits = defineEmits(['clickClose', 'rerenderItem'])
 
 const foodTitle = ref('')
 const foodContent = ref('')
@@ -51,6 +51,7 @@ const registerItem = async () => {
     })
     alert('등록에 성공했습니다.')
     emits('clickClose')
+    emits('rerenderItem')
   } catch (e) {
     console.log(e)
   }
