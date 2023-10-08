@@ -68,6 +68,13 @@ const pageTitleData = ref([
     imgUrl: require('@/assets/icon/icon-product-filtering.png'),
     moveUrl: '/filtering'
   },
+  {
+    id: 'infinityScroll',
+    isShow: true,
+    title: '무한 스크롤',
+    imgUrl: require('@/assets/icon/icon-product-filtering.png'),
+    moveUrl: '/infinityScroll'
+  },
 ])
 
 const checkIsShowList = () => {

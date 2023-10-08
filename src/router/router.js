@@ -7,6 +7,7 @@ import CompleteLogin from "@/views/login/CompleteLogin.vue";
 import SearchView from "@/views/search/SearchView.vue";
 import WishListView from "@/views/wishList/WishListView.vue";
 import FilteringView from "@/views/filtering/FilteringView.vue";
+import InfinityScroll from "@/views/infinityScroll/InfinityScroll.vue";
 
 const routes = [
   {
@@ -40,6 +41,10 @@ const routes = [
   {
     path: "/filtering",
     component: FilteringView,
+  },
+  {
+    path: "/infinityScroll",
+    component: InfinityScroll,
   },
 ];
 

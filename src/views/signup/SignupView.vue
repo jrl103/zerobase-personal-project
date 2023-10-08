@@ -28,7 +28,6 @@
 
             <div class="button-wrap">
               <FormButton :title="'회원가입'" @click-button="signUp()"/>
-
             </div>
           </form>
         </section>

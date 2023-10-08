@@ -48,6 +48,10 @@ watch(() => route.path, (to) => {
       headerTitle.value = 'Product Filterings'
       isNotMain.value = true
       break
+    case '/infinityScroll' :
+      headerTitle.value = 'Infinity Scroll'
+      isNotMain.value = true
+      break
   }
 })
 </script>
@@ -83,6 +87,7 @@ a {
 .main-container {
   width: 600px;
   margin: 0 auto;
+  overflow: hidden;
 }
 .header-title-wrap {
   margin-bottom: 30px;
